@@ -1,0 +1,65 @@
+@import "reset.css";
+
+:root {
+  /* Color */
+  --white: #f9f9f9;
+  --black: #363636;
+  --light-beige: #f0ece3;
+  --sand-beige: #dfd3c3;
+  --tan-beige: #c7b198;
+  --charcoal: #343a40;
+
+  /*   
+  --padding: 12px;
+  --spacing-small: 6px;
+  --avatar-size: 35px;
+
+  
+  --font-large: 18px;
+  --font-medium: 14px;
+  --font-small: 12px;
+  --font-micro: 10px;
+  --icon-size: 16px; */
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+button:focus {
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+textarea {
+  width: 100%;
+}
+
+input[type="submit"] {
+  margin-top: 10px;
+}
+
+body {
+  background-color: var(--light-beige);
+}
+
+.badge {
+  margin-top: 1em;
+  background-color: var(--tan-beige);
+}
+
+.card {
+  background-color: var(--sand-beige);
+}
+
+.btn {
+  background-color: var(--charcoal);
+}
