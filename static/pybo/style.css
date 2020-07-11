@@ -49,6 +49,7 @@ input[type="submit"] {
 
 body {
   background-color: var(--light-beige);
+  font-family: "Roboto", sans-serif;
 }
 
 .badge {
