@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 # from django.http import HttpResponse
-from .models import Question
-
+from .models import Question, Answer
+from .forms import QuestionForm, AnswerForm
 # Create your views here.
 def index(request):
     questionList = Question.objects.order_by('-createDate')
@@ -30,7 +30,36 @@ IndexView는 템플릿 명이 명시적으로 지정되지 않은 경우에는 �
 
 def answerCreate(request, questionId):
     question = get_object_or_404(Question, pk=questionId)
-    question.answer_set.create(content=request.POST.get('answerContent'), createDate=timezone.now())
-    return redirect('pybo:detail', questionId = question.id)
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.createDate = timezone.now()
+            answer.question = question
+            answer.save()
+            return redirect("pybo:detail", questionId=question.id)
+        else:
+            return render(request, "pybo/question_detail.html", {'question':question, 'form':form})    
+    else:
+        form = AnswerForm()
+        context = {'question':question, 'form':form}
+        return render(request, "pybo/question_detail.html", context)
 
- 
+
+def questionCreate(request):
+    if request.method =="POST":
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.createDate=timezone.now()
+            question.save()
+            return redirect("pybo:index")
+        else:
+            return render(request, "pybo/question_form.html", {'form':form})
+    else:
+        form = QuestionForm()
+        return render(request, "pybo/question_form.html", {'form':form})
+            
+
+            
+    

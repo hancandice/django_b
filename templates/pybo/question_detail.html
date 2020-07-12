@@ -34,16 +34,23 @@
     method="post"
     class="my-3"
   >
-    {% csrf_token %}
+    {% csrf_token %} {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+      {% for field in form %} {% if field.errors %}
+      <strong>{{field.label}}</strong>
+      {{field.errors}} {% endif %} {% endfor %}
+    </div>
+    {% endif %}
     <div class="form-group">
       <textarea
-        name="answerContent"
+        name="content"
         id="answerContent"
         class="form-control"
         rows="10"
+        placeholder="Write your answer here ✨"
       ></textarea>
     </div>
-    <input type="submit" value="Answer Submit" class="btn btn-secondary" />
+    <input type="submit" value="Submit Answer" class="btn btn-secondary" />
   </form>
 </div>
 {% endblock %}

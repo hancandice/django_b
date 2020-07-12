@@ -1,7 +1,7 @@
-@import "reset.css";
+@import "../geeknavbar.css";
 
 :root {
-  /* Color */
+  /* CSS Color */
   --white: #f9f9f9;
   --black: #363636;
   --light-beige: #f0ece3;
@@ -49,18 +49,23 @@ input[type="submit"] {
 
 body {
   background-color: var(--light-beige);
-  font-family: "Roboto", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 .badge {
   margin-top: 1em;
   background-color: var(--tan-beige);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0);
 }
 
 .card {
   background-color: var(--sand-beige);
+  border: none;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0);
 }
 
-.btn {
-  background-color: var(--charcoal);
+textarea .form-control {
+  outline: none;
+  resize: none;
+  /* overflow: auto; */
 }

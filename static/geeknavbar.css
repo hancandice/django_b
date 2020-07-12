@@ -1,0 +1,129 @@
+:root {
+  --navbar-text-color: #dee4eb;
+  --navbar-background-color: #4b5055;
+  --navbar-accent-color: tomato;
+  --navbar-green-color: #4ca044;
+}
+
+nav > a:hover,
+nav > a:visited,
+nav > a:link,
+nav > a:active {
+  text-decoration: none;
+  color: var(--navbar-text-color);
+}
+
+.geeknavbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--navbar-background-color);
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0);
+}
+
+.geeknavbar__logo {
+  font-size: large;
+  color: var(--navbar-text-color);
+}
+
+.geeknavbar__logo i {
+  color: var(--navbar-accent-color);
+  padding-right: 1rem;
+}
+
+.geeknavbar__menu {
+  display: flex;
+  /* list-style: none; */
+  padding-left: 0;
+}
+
+.geeknavbar__menu span {
+  padding: 0px 12px;
+  color: #c7b198;
+}
+
+.geeknavbar__menu span:hover {
+  background-color: #343a40;
+  border-radius: 12px;
+}
+
+.geeknavbar__icons {
+  /* list-style: none; */
+  color: var(--navbar-text-color);
+  display: flex;
+  padding: 0;
+}
+
+.geeknavbar__icons span {
+  padding: 0px 12px;
+}
+
+.geeknavbar__toggleBtn {
+  display: none;
+  position: absolute;
+  right: 32px;
+  font-size: large;
+  /* color: #d49466; */
+}
+
+@media screen and (max-width: 768px) {
+  .geeknavbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .geeknavbar__menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 16px;
+  }
+
+  .geeknavbar__menu span {
+    width: 100%;
+    text-align: center;
+    padding: 8px 0px;
+  }
+
+  .geeknavbar__icons {
+    display: none;
+    justify-content: center;
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .geeknavbar__toggleBtn {
+    display: block;
+    animation: lean 1.5s ease-in-out infinite;
+  }
+
+  @keyframes lean {
+    0% {
+      transform: none;
+    }
+    30% {
+      transform: rotateZ(10deg);
+    }
+    60% {
+      transform: none;
+    }
+    100% {
+      transform: rotateY(-10deg);
+    }
+  }
+
+  .geeknavbar__menu.active,
+  .geeknavbar__icons.active {
+    display: flex;
+  }
+
+  .geeknavbar__toggleBtn.active {
+    animation-duration: 0s;
+  }
+}

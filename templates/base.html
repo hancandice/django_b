@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap"
       rel="stylesheet"
     />
     <link
@@ -18,9 +18,16 @@
       type="text/css"
       href="{% static 'pybo/style.css' %}"
     />
+    <script
+      src="https://kit.fontawesome.com/9c50925554.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'geeknavbar.js' %}" defer></script>
     <title>Django</title>
   </head>
   <body>
-    {% block content %} {% endblock %}
+    {% include "geeknavbar.html" %} {% block content %} {% endblock %}
+    <script src="{% static 'jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap.min.js' %}"></script>
   </body>
 </html>
