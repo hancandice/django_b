@@ -8,6 +8,7 @@ urlpatterns = [
     path('<int:questionId>/', views.detail, name="detail"),
     path('answer/create/<int:questionId>/', views.answerCreate, name="answer_create"),
     path("question/create/", views.questionCreate, name="question_create"),
+    path("question/modify/<int:question_id>", views.questionModify, name="question_modify"),
 ]
 
 """ 제네릭 뷰(Generic Views) 

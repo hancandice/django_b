@@ -2767,7 +2767,7 @@ fieldset:disabled a.btn {
 }
 .btn-outline-secondary {
   color: var(--charcoal);
-  border-color: var(--charcoal);
+  border-color: #C7B198;
 }
 .btn-outline-secondary:hover {
   color: #fff;

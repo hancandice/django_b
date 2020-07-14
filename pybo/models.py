@@ -9,6 +9,7 @@ class Question(models.Model):
     createDate = models.DateTimeField()
     # 작성일시처럼 날짜와 시간에 관계된 속성은 DateTimeField를 사용해야 한다.
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    modifyDate = models.DateTimeField(null=True, blank=True)
     def __str__(self):
         return self.subject
     # ※ 모델에 메서드가 추가될 경우에는 makemigrations와 migrate 를 수행할 필요는 없다. migrate가 필요한 경우는 모델의 속성이 변경되었을 때뿐이다.    
@@ -20,5 +21,8 @@ class Answer(models.Model):
     # Question과 Answer는 서로 연결되어 있기 때문에 answer_set을 사용하면 질문과 연결된 답변을 가져올 수 있다. Answer모델에서 ForignKey로 Question을 연결해 주었기 때문에 answer_set이 가능해진 것이다.
     content = models.TextField()
     createDate = models.DateTimeField()
+    modifyDate = models.DateTimeField(null=True, blank=True)
 
-#  이제 작성한 모델을 이용하여 테이블들을 생성해 보자. 테이블 생성을 위해 가장 먼저 해야 할 일은 pybo앱을 config/settings.py 파일의 INSTALLED_APPS 항목에 추가하는 일이다.
+    # null=True의 의미는 modify_date를 데이터베이스에 저장할때 null이 허용된다는 의미이다. blank=True의 의미는 입력 폼 데이터 체크시(form.is_valid()) 값이 없어도 오류를 내지 않는다는 의미이다. 즉, null=True, blank=True을 사용하면 어떤 조건으로든 값을 비워둘수 있음을 의미한다. 수정일시는 수정이 발생할 경우에만 생성되는 데이터이므로 null=True, blank=True 속성을 지정하였다.
+
+# 이제 작성한 모델을 이용하여 테이블들을 생성해 보자. 테이블 생성을 위해 가장 먼저 해야 할 일은 pybo앱을 config/settings.py 파일의 INSTALLED_APPS 항목에 추가하는 일이다.
