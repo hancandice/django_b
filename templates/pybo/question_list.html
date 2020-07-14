@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% load pybo_filter %}
+{% block content %}
 
 <div class="container my-3">
   <table class="table">
@@ -12,9 +14,12 @@
     <tbody>
       {% if questionList %} {% for question in questionList %}
       <tr>
-        <td>{{ forloop.counter }}</td>
+        <td>{{ questionList.paginator.count|sub:questionList.start_index|sub:forloop.counter|add:2 }}</td>
         <td>
           <a href="{% url 'pybo:detail' question.id %}">{{question.subject}}</a>
+          {% if question.answer_set.count > 0 %}
+          <span class="text-danger small ml-4">{{ question.answer_set.count }}</span>
+          {% endif %}
         </td>
         <td>{{question.createDate}}</td>
       </tr>
@@ -26,12 +31,48 @@
       {% endif %}
     </tbody>
   </table>
+  <ul class="pagination justify-content-center">
+    {% if questionList.has_previous %}
+    <li class="page-item">
+      <a href="?page={{questionList.previous_page_number}}" class="page-link"
+        >prev</a
+      >
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a href="#" class="page-link" tabindex="-1" aria-disabled="true">prev</a>
+    </li>
+    {% endif %} 
+    {% for pageNumber in questionList.paginator.page_range %} 
+    {% if pageNumber >= questionList.number|add:-5 and pageNumber <= questionList.number|add:5 %}
+    {% if pageNumber == questionList.number %}
+    <li class="page-item active" aria-current="page">
+      <a href="?page={{ pageNumber }}" class="page-link" style="background-color: #C7B198; border-color: #C7B198;">{{ pageNumber }}</a>
+    </li>
+    {% else %}
+    <li class="page-item">
+      <a href="?page={{ pageNumber }}" class="page-link">{{ pageNumber }}</a>
+    </li>
+    {% endif %} 
+    {% endif %}
+    {% endfor %} 
+    {% if questionList.has_next %}
+    <li class="page-item">
+      <a href="?page={{questionList.next_page_number}}" class="page-link"
+        >next</a
+      >
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a href="#" class="page-link" tabindex="-1" aria-disabled="true">next</a>
+    </li>
+    {% endif %}
+  </ul>
   <a
     href="{% url 'pybo:question_create' %}"
     class="btn btn-secondary"
     style="color: #ffffff;"
-    >Ask Question</a
-  >
+    >Ask Question</a>
 </div>
 
 {% endblock %}

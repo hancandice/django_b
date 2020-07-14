@@ -31,6 +31,10 @@
   --sand-beige: #dfd3c3;
   --tan-beige: #c7b198;
   --charcoal: #343a40;
+  --navbar-text-color: #dee4eb;
+  --navbar-background-color: #4b5055;
+  --navbar-accent-color: tomato;
+  --navbar-green-color: #4ca044;
 
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
@@ -704,6 +708,7 @@ pre code {
   flex: 0 0 33.333333%;
   max-width: 33.333333%;
 }
+
 .col-5 {
   -ms-flex: 0 0 41.666667%;
   flex: 0 0 41.666667%;
@@ -724,6 +729,7 @@ pre code {
   flex: 0 0 66.666667%;
   max-width: 66.666667%;
 }
+
 .col-9 {
   -ms-flex: 0 0 75%;
   flex: 0 0 75%;
@@ -4736,8 +4742,8 @@ input[type="submit"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: var(--navbar-background-color);
+  border-color: var(--navbar-background-color);
 }
 .page-item.disabled .page-link {
   color: #6c757d;

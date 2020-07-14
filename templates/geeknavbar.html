@@ -1,7 +1,7 @@
 <nav class="geeknavbar">
   <div class="geeknavbar__logo">
     <i class="fab fa-accusoft"></i>
-    <a href="">GeekJeeyoung</a>
+    <a href="{% url "pybo:index" %}">GeekJeeyoung</a>
   </div>
 
   <div class="geeknavbar__menu">
@@ -9,7 +9,11 @@
     <span><a href="">Gallery</a></span>
     <span><a href="{% url "pybo:index" %}">Forum</a></span>
     <span><a href="">Contacts</a></span>
-    <span><a href="">Bookings</a></span>
+    {% if user.is_authenticated %}
+    <span style="color: #DEE4EB;"><a href="{% url 'common:logout' %}">{{ user.username }} [Logout]</a></span>
+    {% else %}
+    <span><a href="{% url 'common:login' %}">Login</a></span>
+    {% endif %}
   </div>
 
   

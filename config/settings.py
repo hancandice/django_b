@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pybo.apps.PyboConfig', # (※ 파이보 앱을 INSTALLED_APPS 항목에 추가하지 않으면 데이터베이스 관련된 작업을 할 수 없으니 빠뜨리지 않도록 주의하자.)
+    'pybo.apps.PyboConfig',
+    'common.apps.CommonConfig',
+     # (※ 파이보 앱을 INSTALLED_APPS 항목에 추가하지 않으면 데이터베이스 관련된 작업을 할 수 없으니 빠뜨리지 않도록 주의하자.)
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,6 @@ STATICFILES_DIRS = [
 ]
 
 # 템플릿과 마찬가지로 앱 디렉터리 바로 밑에 static 디렉터리를 생성해도 장고는 static 디렉터리로 인식한다. 즉, 다음처럼 pybo 디렉터리 하위에 static 디렉터리를 만들어도 장고가 static 디렉터리로 인식하게 될 것이다.
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

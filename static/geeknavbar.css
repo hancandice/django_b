@@ -5,6 +5,8 @@
   --navbar-green-color: #4ca044;
 }
 
+
+
 nav > a:hover,
 nav > a:visited,
 nav > a:link,
@@ -91,6 +93,7 @@ nav > a:active {
     padding: 8px 0px;
   }
 
+
   .geeknavbar__icons {
     display: none;
     justify-content: center;
@@ -127,3 +130,4 @@ nav > a:active {
     animation-duration: 0s;
   }
 }
+
