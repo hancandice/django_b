@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 # from django.http import HttpResponse
 from .models import Question, Answer
 from .forms import QuestionForm, AnswerForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     page = request.GET.get('page', '1')
@@ -32,7 +33,7 @@ class DetailView(generic.DetailView):
     
 IndexView는 템플릿 명이 명시적으로 지정되지 않은 경우에는 자동으로 모델명_list.html을 템플릿명으로 사용하게 된다. 마찬가지로 DetailView는 모델명_detail.html을 템플릿명으로 사용한다.    """
 
-
+@login_required(login_url="common:login")
 def answerCreate(request, questionId):
     question = get_object_or_404(Question, pk=questionId)
     if request.method == "POST":
@@ -41,6 +42,7 @@ def answerCreate(request, questionId):
             answer = form.save(commit=False)
             answer.createDate = timezone.now()
             answer.question = question
+            answer.author = request.user
             answer.save()
             return redirect("pybo:detail", questionId=question.id)
         else:
@@ -50,12 +52,13 @@ def answerCreate(request, questionId):
         context = {'question':question, 'form':form}
         return render(request, "pybo/question_detail.html", context)
 
-
+@login_required(login_url="common:login")
 def questionCreate(request):
     if request.method =="POST":
         form = QuestionForm(request.POST)
         if form.is_valid():
             question = form.save(commit=False)
+            question.author = request.user
             question.createDate=timezone.now()
             question.save()
             return redirect("pybo:index")

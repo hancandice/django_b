@@ -6,12 +6,13 @@
             <h4>Log In</h4>
         </div>
         <div class="col-8 text-right">
-            <span>or <a href="{% url 'common:signup' %}">Sign Up</a></span>
+            <span>or <a href="{% url 'common:signup' %}" class="ml-2 btn btn-info" style="color:whitesmoke">Sign Up</a></span>
         </div>
     </div>
     <br>
     <form action="{% url 'common:login' %}" method="POST" class="post-form">
         {% csrf_token %}
+        <input type="hidden" name="next" value="{{next}}">
         {% include "form_errors.html" %}
         <div class="form-group">
             <label for="username">Username</label>
