@@ -26,3 +26,22 @@ class Answer(models.Model):
     # null=True의 의미는 modify_date를 데이터베이스에 저장할때 null이 허용된다는 의미이다. blank=True의 의미는 입력 폼 데이터 체크시(form.is_valid()) 값이 없어도 오류를 내지 않는다는 의미이다. 즉, null=True, blank=True을 사용하면 어떤 조건으로든 값을 비워둘수 있음을 의미한다. 수정일시는 수정이 발생할 경우에만 생성되는 데이터이므로 null=True, blank=True 속성을 지정하였다.
 
 # 이제 작성한 모델을 이용하여 테이블들을 생성해 보자. 테이블 생성을 위해 가장 먼저 해야 할 일은 pybo앱을 config/settings.py 파일의 INSTALLED_APPS 항목에 추가하는 일이다.
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    createDate = models.DateTimeField()
+    modifyDate = models.DateTimeField(null=True, blank=True)
+    question = models.ForeignKey(Question, null=True, blank=True, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, null=True, blank=True, on_delete=models.CASCADE)
+
+
+
+# 장고의 기능을 개발하는 패턴
+
+# 템플릿에 추가 기능을 위한 링크(버튼등)추가
+# urls.py에 링크에 해당되는 URL 매핑을 작성
+# forms.py에 폼 작성 (폼이 필요없는 경우에는 생략)
+# views.py에 URL매핑에 의해 실행되는 함수 작성
+# 함수에서 사용하는 템플릿 작성    
+
