@@ -48,12 +48,27 @@ def questionModify(request, question_id):
 
 
 
+# @login_required(login_url='common:login')                
+# def questionDelete(request, questionId):
+#     question = get_object_or_404(Question, pk=questionId)
+#     if request.user != question.author:
+#         messages.error(request, 'Not authorized to delete')
+#         return redirect('pybo:detail', questionId=question.id)
+#     question.delete()
+#     return redirect('pybo:index')
+
 @login_required(login_url='common:login')                
 def questionDelete(request, questionId):
     question = get_object_or_404(Question, pk=questionId)
     if request.user != question.author:
         messages.error(request, 'Not authorized to delete')
         return redirect('pybo:detail', questionId=question.id)
-    question.delete()
-    return redirect('pybo:index')
+    else:
+        if (question.answer_set.count() > 0):
+            messages.error(request, "Question with answer(s) cannot be deleted")
+            return redirect('pybo:detail', questionId=question.id)
+        else:
+            question.delete()
+            return redirect('pybo:index')
 
+    
