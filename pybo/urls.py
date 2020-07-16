@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import base_views, question_views, answer_views, comment_views
+from .views import base_views, question_views, answer_views, comment_views, vote_views 
 
 app_name = 'pybo'
 urlpatterns = [
@@ -18,6 +18,8 @@ urlpatterns = [
     path('comment/create/answer/<int:answerId>/', comment_views.commentCreateAnswer, name='comment_create_answer'),
     path('comment/modify/answer/<int:commentId>/', comment_views.commentModifyAnswer, name='comment_modify_answer'),
     path('comment/delete/answer/<int:commentId>/', comment_views.commentDeleteAnswer, name='comment_delete_answer'),
+    path('vote/question/<int:questionId>/', vote_views.voteQuestion, name="vote_question"),
+    path('vote/answer/<int:answerId>/', vote_views.voteAnswer, name="vote_answer"),
 ]
 
 """ 제네릭 뷰(Generic Views) 

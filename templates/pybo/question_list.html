@@ -7,15 +7,22 @@
     <thead>
       <tr class="thead-dark text-center">
         <th>No.</th>
+        <th>Likes</th>
         <th style="width:50%">Title</th>
         <th>Author</th>
         <th>Date</th>
       </tr>
     </thead>
     <tbody>
-      {% if questionList %} {% for question in questionList %}
+      {% if questionList %} 
+      {% for question in questionList %}
       <tr class="text-center">
         <td>{{ questionList.paginator.count|sub:questionList.start_index|sub:forloop.counter|add:2 }}</td>
+        <td>
+          {% if question.voter.all.count >= 0 %}
+          <span class="btn btn-success btn-sm" style="cursor: none; box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0);">{{ question.voter.all.count }}</span>
+          {% endif %}
+        </td>
         <td class="text-left">
           <a href="{% url 'pybo:detail' question.id %}">{{question.subject}}</a>
           {% if question.answer_set.count > 0 %}

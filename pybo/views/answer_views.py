@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.utils import timezone
 from django.core.paginator import Paginator
 # from django.http import HttpResponse
@@ -20,7 +20,7 @@ def answerCreate(request, questionId):
             answer.question = question
             answer.author = request.user
             answer.save()
-            return redirect("pybo:detail", questionId=question.id)
+            return redirect('{}#answer_{}'.format(resolve_url('pybo:detail', questionId=question.id), answer.id))
         else:
             return render(request, "pybo/question_detail.html", {'question':question, 'form':form})    
     else:
@@ -48,7 +48,7 @@ def answerModify(request, answerId):
                 answer.author = request.user
                 answer.modifyDate = timezone.now()
                 answer.save()
-                return redirect('pybo:detail', questionId = answer.question.id)
+                return redirect('{}#answer_{}'.format(resolve_url('pybo:detail',questionId=answer.question.id), answer.id))
             else:
                 context = {'answer':answer, 'form':form}
                 return render(request, 'pybo/answer_form.html', context)   

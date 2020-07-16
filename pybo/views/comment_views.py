@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.utils import timezone
 from django.core.paginator import Paginator
 # from django.http import HttpResponse
@@ -24,7 +24,7 @@ def commentCreateQuestion(request, questionId):
             comment.createDate = timezone.now()
             comment.question = question
             comment.save()
-            return redirect('pybo:detail', questionId=question.id)
+            return redirect('{}#comment_{}'.format(resolve_url('pybo:detail',questionId=comment.question.id),comment.id))
         else:
             return render(request, 'pybo/comment_form.html', {'form':form})
 
@@ -46,7 +46,7 @@ def commentModifyQuestion(request, commentId):
                 comment.author = request.user
                 comment.modifyDate = timezone.now()
                 comment.save()
-                return redirect('pybo:detail', questionId=comment.question.id)
+                return redirect('{}#comment_{}'.format(resolve_url('pybo:detail',questionId=comment.question.id),comment.id))
             else:
                 context = {'form':form}
                 return render(request, 'pybo/comment_form.html', context)
@@ -78,7 +78,7 @@ def commentCreateAnswer(request, answerId):
             comment.createDate = timezone.now()
             comment.answer = answer
             comment.save()
-            return redirect('pybo:detail', questionId=answer.question.id)
+            return redirect('{}#comment_{}'.format(resolve_url('pybo:detail',questionId=comment.answer.question.id),comment.id))
         else:
             return render(request, 'pybo/comment_form.html', {'form':form})
 
@@ -100,7 +100,7 @@ def commentModifyAnswer(request, commentId):
                 comment.author = request.user
                 comment.modifyDate = timezone.now()
                 comment.save()
-                return redirect('pybo:detail', questionId=comment.answer.question.id)
+                return redirect('{}#comment_{}'.format(resolve_url('pybo:detail',questionId=comment.answer.question.id),comment.id))
             else:
                 context = {'form':form}
                 return render(request, 'pybo/comment_form.html', context)
@@ -114,3 +114,4 @@ def commentDeleteAnswer(request, commentId):
     else:
         comment.delete()
         return redirect('pybo:detail', questionId=comment.answer.question.id)
+        
