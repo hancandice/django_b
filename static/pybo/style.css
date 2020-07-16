@@ -69,3 +69,7 @@ textarea .form-control {
   resize: none;
   /* overflow: auto; */
 }
+
+pre {
+  background-color: #F0F0F0;
+}
