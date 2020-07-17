@@ -2,7 +2,7 @@
   --navbar-text-color: #dee4eb;
   --navbar-background-color: #4b5055;
   --navbar-accent-color: tomato;
-  --navbar-green-color: #4ca044;
+  --navbar-green-color: #4FA846;
 }
 
 
@@ -33,7 +33,7 @@ nav > a:active {
 }
 
 .geeknavbar__logo i {
-  color: var(--navbar-accent-color);
+  color: var(--navbar-green-color);
   padding-right: 1rem;
 }
 
